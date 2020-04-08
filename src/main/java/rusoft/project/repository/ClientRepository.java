@@ -1,6 +1,7 @@
 package rusoft.project.repository;
 
-import rusoft.project.entity.Car;
+import rusoft.project.entity.Client;
 
-public interface ClientRepository extends AbstractRepository<Car, Long> {
+public interface ClientRepository extends AbstractRepository<Client, Long> {
+
 }

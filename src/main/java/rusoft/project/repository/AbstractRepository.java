@@ -6,4 +6,5 @@ import rusoft.project.entity.AbstractEntity;
 
 @NoRepositoryBean
 public interface AbstractRepository<E extends AbstractEntity, I> extends CrudRepository<E, I> {
+
 }

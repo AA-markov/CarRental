@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @Accessors(chain = true)
 @Table(name = "cars")
-public class Car implements AbstractEntity<Long>{
+public class Car implements AbstractEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
