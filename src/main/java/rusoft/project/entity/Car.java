@@ -20,6 +20,6 @@ public class Car implements AbstractEntity<Long> {
     @NotEmpty
     private Long manufactureYear;
     @ManyToOne
-    @JoinColumn(name = "clientName")
+    @JoinColumn(name = "name")
     private Client owner;
 }
