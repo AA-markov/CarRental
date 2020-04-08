@@ -21,7 +21,7 @@ dependencies {
 	implementation 'org.hibernate:hibernate-core:5.4.14.Final'
 	implementation "org.projectlombok:lombok:1.18.10"
 	annotationProcessor "org.projectlombok:lombok:1.18.10"
-//	implementation "org.liquibase:liquibase-core:3.4.1"
+	implementation "org.liquibase:liquibase-core:3.4.1"
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
 	implementation 'mysql:mysql-connector-java:8.0.19'
 	testImplementation 'com.h2database:h2:1.4.199'

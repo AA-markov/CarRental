@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
+#    driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rent
     username: root
     password: mysql
@@ -18,7 +18,8 @@ spring:
           use_jdbc_metadata_defaults: false
     show-sql: true
 
-#  liquibase:
-#    change-log: classpath:db/db.changelog-master.yml
+  liquibase:
+    change-log: classpath:db/db.changelog-master.yml
+
   jackson:
     default-property-inclusion : NON_NULL
