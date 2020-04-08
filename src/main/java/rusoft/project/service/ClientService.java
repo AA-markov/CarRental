@@ -1,8 +1,13 @@
 package rusoft.project.service;
 
+import rusoft.project.dto.RentEndDto;
+import rusoft.project.dto.RentStartDto;
+import rusoft.project.entity.Car;
+import rusoft.project.entity.Client;
+
 public interface ClientService {
 
-    public void addClient(String clientName, Long birthYear, String carBrand, Long manufactureYear);
+    public Client addClient(RentStartDto rentStartData);
 
-    public void removeClient(String clientName, String carBrand);
+    public Car removeClient(RentEndDto rentEndData);
 }

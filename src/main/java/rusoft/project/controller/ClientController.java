@@ -7,6 +7,7 @@ import rusoft.project.dto.RentEndDto;
 import rusoft.project.dto.RentStartDto;
 import rusoft.project.entity.Car;
 import rusoft.project.entity.Client;
+import rusoft.project.service.ClientService;
 
 import javax.validation.Valid;
 
@@ -14,13 +15,17 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class ClientController {
 
+    private final ClientService clientService;
+
     @PutMapping(path = "/add")
-    public ResponseEntity<Client> addClient(@RequestBody @Valid RentStartDto rent) {
-        return ResponseEntity.ok(new Client());
+    public ResponseEntity<Client> addClient(@RequestBody @Valid RentStartDto rentStart) {
+        Client response = clientService.addClient(rentStart);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping(path = "/delete")
-    public ResponseEntity<Car> deleteClient(@RequestBody @Valid RentEndDto rent) {
-        return ResponseEntity.ok(new Car());
+    public ResponseEntity<Car> deleteClient(@RequestBody @Valid RentEndDto rentEnd) {
+        Car response = clientService.removeClient(rentEnd);
+        return ResponseEntity.ok(response);
     }
 }
