@@ -16,11 +16,13 @@ public class Client implements AbstractEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
     @NotNull
     private String name;
     @NotNull
     private Long birthYear;
     @OneToMany(mappedBy = "owner")
+    @EqualsAndHashCode.Exclude
     private List<Car> carList;
 }

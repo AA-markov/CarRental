@@ -1,7 +1,6 @@
 package rusoft.project.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rusoft.project.dto.RentEndDto;
@@ -21,17 +20,11 @@ public class RentController {
     public ResponseEntity<String> addClient(@RequestBody @Valid RentStartDto rentStart) {
         ResponseStatus response = rentService.addClient(rentStart);
         return new ResponseEntity(response, response.getStatus());
-        //    OK,
-        //    CLIENTFOUND,
-        //    CARNOTFOUND,
-        //    CARINRENT
     }
 
     @DeleteMapping(path = "/delete")
     public ResponseEntity<String> deleteClient(@RequestBody @Valid RentEndDto rentEnd) {
         ResponseStatus response = rentService.removeClient(rentEnd);
         return new ResponseEntity(response, response.getStatus());
-        //    OK,
-        //    CLIENTCARNOTFOUND
     }
 }

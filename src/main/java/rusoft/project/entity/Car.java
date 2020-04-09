@@ -1,6 +1,7 @@
 package rusoft.project.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Car implements AbstractEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
     @NotNull
     private String brand;
@@ -21,5 +23,6 @@ public class Car implements AbstractEntity<Long> {
     private Long manufactureYear;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner")
+    @EqualsAndHashCode.Exclude
     private Client owner;
 }

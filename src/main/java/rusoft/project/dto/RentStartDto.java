@@ -4,16 +4,17 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Accessors(chain = true)
 public class RentStartDto {
     @NotEmpty
     String clientName;
-    @NotEmpty
+    @NotNull
     Long birthYear;
     @NotEmpty
     String carBrand;
-    @NotEmpty
+    @NotNull
     Long manufactureYear;
 }
