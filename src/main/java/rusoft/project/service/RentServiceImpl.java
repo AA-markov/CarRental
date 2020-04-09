@@ -80,12 +80,6 @@ public class RentServiceImpl implements RentService {
                 new EntityNotFoundException(String.format("%s, %s does not exist in database", brand, year)));
     }
 
-//    private boolean existsByBrandName(String brand, String name) {
-//        return carRepository.findByBrand(brand).stream()
-//                .map(Car::getOwner)
-//                .anyMatch(client -> client.getName().equals(name));
-//    }
-
     @Transactional
     private Car findByBrandName(String brand, String name) {
         return carRepository.findByBrandAndOwnerName(brand, name).orElseThrow(()->
