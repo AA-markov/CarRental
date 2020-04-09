@@ -2,7 +2,11 @@ package rusoft.project.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import rusoft.project.dto.RentEndDto;
 import rusoft.project.dto.RentStartDto;
 import rusoft.project.model.ResponseStatus;

@@ -66,7 +66,6 @@ public class RentServiceImpl implements RentService {
     }
 
     private void endRent(RentEndDto rentEndData) {
-
         Car car = findByBrandName(rentEndData.getCarBrand(), rentEndData.getClientName());
         Client client = car.getOwner();
         clientRepository.delete(client);

@@ -6,7 +6,7 @@ import rusoft.project.model.ResponseStatus;
 
 public interface RentService {
 
-    public ResponseStatus addClient(RentStartDto rentStartData);
+    ResponseStatus addClient(RentStartDto rentStartData);
 
-    public ResponseStatus removeClient(RentEndDto rentEndData);
+    ResponseStatus removeClient(RentEndDto rentEndData);
 }
