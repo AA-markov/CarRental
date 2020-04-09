@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @Accessors(chain = true)
-public class RentEndDto {
+public class RentEndDto implements AbstractRentDto {
     @NotEmpty
     String clientName;
     @NotEmpty

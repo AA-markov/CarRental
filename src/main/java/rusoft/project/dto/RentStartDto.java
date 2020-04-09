@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Accessors(chain = true)
-public class RentStartDto {
+public class RentStartDto implements AbstractRentDto {
     @NotEmpty
     String clientName;
     @NotNull
