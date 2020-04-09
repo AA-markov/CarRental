@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -15,11 +15,11 @@ public class Car implements AbstractEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+    @NotNull
     private String brand;
-    @NotEmpty
+    @NotNull
     private Long manufactureYear;
-    @ManyToOne
-    @JoinColumn(name = "name")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "owner")
     private Client owner;
 }

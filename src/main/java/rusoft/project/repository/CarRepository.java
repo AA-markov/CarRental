@@ -10,7 +10,7 @@ public interface CarRepository extends AbstractRepository<Car, Long> {
 
     Optional<Car> findByBrandAndManufactureYear (String brand, Long manufactureYear);
 
-    boolean existsByBrandAndName(String brand, String name);
+    boolean existsByBrandAndOwner(String brand, String owner);
 
-    Optional<Car> findByBrandAndName (String brand, String name);
+    Optional<Car> findByBrandAndOwner(String brand, String owner);
 }

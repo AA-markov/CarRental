@@ -49,7 +49,7 @@ public class RentServiceImpl implements RentService {
         if (rentEndData.getClientName().equals(basicClient.getName())) {
             return ResponseStatus.CLIENTCARNOTFOUND;
         }
-        if (carRepository.existsByBrandAndName(rentEndData.getCarBrand(), rentEndData.getClientName())) {
+        if (carRepository.existsByBrandAndOwner(rentEndData.getCarBrand(), rentEndData.getClientName())) {
             endRent(rentEndData);
             return ResponseStatus.OK;
         }
@@ -60,7 +60,7 @@ public class RentServiceImpl implements RentService {
         Car car = findByBrandYear(rentStartData.getCarBrand(), rentStartData.getManufactureYear());
         Client client = new Client().setName(rentStartData.getClientName())
                 .setBirthYear(rentStartData.getBirthYear())
-                .setCars(Collections.singletonList(car));
+                .setCarList(Collections.singletonList(car));
         clientRepository.save(client);
         carRepository.save(car.setOwner(client));
     }
@@ -78,7 +78,7 @@ public class RentServiceImpl implements RentService {
     }
 
     private Car findByBrandName(String brand, String name) {
-        return carRepository.findByBrandAndName(brand, name).orElseThrow(() ->
+        return carRepository.findByBrandAndOwner(brand, name).orElseThrow(() ->
                 new EntityNotFoundException(String.format("%s with owner %s does not exist in database", brand, name)));
     }
 }

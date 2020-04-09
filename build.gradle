@@ -21,12 +21,14 @@ dependencies {
 	implementation 'org.hibernate:hibernate-core:5.4.14.Final'
 	implementation "org.projectlombok:lombok:1.18.10"
 	annotationProcessor "org.projectlombok:lombok:1.18.10"
-	implementation "org.liquibase:liquibase-core:3.4.1"
+	implementation "org.liquibase:liquibase-core:3.8.4"
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
 	implementation 'mysql:mysql-connector-java:8.0.19'
 	testImplementation 'com.h2database:h2:1.4.199'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mockito:mockito-junit-jupiter:5.4.0'
+	compile group: 'com.vladmihalcea', name: 'hibernate-types-52', version: '2.1.1'
+	implementation 'org.postgresql:postgresql:42.2.12'
+//	testImplementation 'org.mockito:mockito-junit-jupiter:5.4.0'
 }
 
 test {
