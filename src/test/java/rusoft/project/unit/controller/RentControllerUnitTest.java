@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 import rusoft.project.Application;
 import rusoft.project.dto.AbstractRentDto;
 import rusoft.project.dto.RentEndDto;
@@ -24,14 +23,15 @@ import rusoft.project.model.ResponseStatus;
 import rusoft.project.service.RentService;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
-class RentControllerTest {
+@AutoConfigureMockMvc
+class RentControllerUnitTest {
 
+    @Autowired
     private MockMvc mvc;
-    private WebApplicationContext webApplicationContext;
     private String addClientRequest;
     private String deleteClientRequest;
     @MockBean
@@ -39,14 +39,8 @@ class RentControllerTest {
     private RentStartDto rentStartDto;
     private RentEndDto rentEndDto;
 
-    @Autowired
-    public void setWebApplicationContext(WebApplicationContext webApplicationContext) {
-        this.webApplicationContext = webApplicationContext;
-    }
-
     @BeforeEach
     public void setUp() {
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         rentStartDto = new RentStartDto()
                 .setClientName("Ivan")
                 .setBirthYear(1990L)
@@ -92,6 +86,7 @@ class RentControllerTest {
         when(rentService.addClient(Mockito.any(RentStartDto.class))).thenReturn(ResponseStatus.OK);
         int status = getStatusAfterTryToAddClient(addClientRequest);
         assertEquals(HttpStatus.OK.value(), status);
+        verify(rentService, times(1)).addClient(rentStartDto);
     }
 
     @Test
@@ -99,6 +94,7 @@ class RentControllerTest {
         when(rentService.addClient(Mockito.any(RentStartDto.class))).thenReturn(ResponseStatus.OK);
         int status = getStatusAfterTryToAddClient("Some string");
         assertEquals(HttpStatus.BAD_REQUEST.value(), status);
+        verify(rentService, never()).addClient(Mockito.any());
     }
 
     @Test
@@ -106,6 +102,7 @@ class RentControllerTest {
         when(rentService.removeClient(Mockito.any(RentEndDto.class))).thenReturn(ResponseStatus.OK);
         int status = getStatusAfterTryToDeleteClient(deleteClientRequest);
         assertEquals(HttpStatus.OK.value(), status);
+        verify(rentService, times(1)).removeClient(rentEndDto);
     }
 
     @Test
@@ -113,5 +110,6 @@ class RentControllerTest {
         when(rentService.removeClient(Mockito.any(RentEndDto.class))).thenReturn(ResponseStatus.OK);
         int status = getStatusAfterTryToDeleteClient("Some string");
         assertEquals(HttpStatus.BAD_REQUEST.value(), status);
+        verify(rentService, never()).removeClient(Mockito.any());
     }
 }

@@ -17,7 +17,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compile group: 'org.springframework.data', name: 'spring-data-commons', version: '2.2.6.RELEASE'
+	implementation 'org.springframework.data:spring-data-commons:2.2.6.RELEASE'
 	implementation 'org.hibernate:hibernate-core:5.4.14.Final'
 	implementation "org.projectlombok:lombok:1.18.10"
 	annotationProcessor "org.projectlombok:lombok:1.18.10"
@@ -26,9 +26,6 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.19'
 	testImplementation 'com.h2database:h2:1.4.199'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	compile group: 'com.vladmihalcea', name: 'hibernate-types-52', version: '2.1.1'
-	implementation 'org.postgresql:postgresql:42.2.12'
-//	testImplementation 'org.mockito:mockito-junit-jupiter:5.4.0'
 }
 
 test {
