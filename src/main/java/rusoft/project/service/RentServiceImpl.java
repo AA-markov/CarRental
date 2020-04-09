@@ -45,17 +45,19 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
+    @Transactional
     public ResponseStatus removeClient(RentEndDto rentEndData) {
         if (rentEndData.getClientName().equals(basicClient.getName())) {
             return ResponseStatus.CLIENTCARNOTFOUND;
         }
-        if (carRepository.findByBrandAndName(rentEndData.getCarBrand(), rentEndData.getClientName()).isPresent()) {
+        if (carRepository.findByBrandAndOwnerName(rentEndData.getCarBrand(), rentEndData.getClientName()).isPresent()) {
             endRent(rentEndData);
             return ResponseStatus.OK;
         }
         else return ResponseStatus.CLIENTCARNOTFOUND;
     }
 
+    @Transactional
     private void createRent(RentStartDto rentStartData) {
         Car car = findByBrandYear(rentStartData.getCarBrand(), rentStartData.getManufactureYear());
         Client client = new Client().setName(rentStartData.getClientName())
@@ -65,6 +67,7 @@ public class RentServiceImpl implements RentService {
         carRepository.save(car.setOwner(client));
     }
 
+    @Transactional
     private void endRent(RentEndDto rentEndData) {
         Car car = findByBrandName(rentEndData.getCarBrand(), rentEndData.getClientName());
         Client client = car.getOwner();
@@ -77,8 +80,15 @@ public class RentServiceImpl implements RentService {
                 new EntityNotFoundException(String.format("%s, %s does not exist in database", brand, year)));
     }
 
+//    private boolean existsByBrandName(String brand, String name) {
+//        return carRepository.findByBrand(brand).stream()
+//                .map(Car::getOwner)
+//                .anyMatch(client -> client.getName().equals(name));
+//    }
+
+    @Transactional
     private Car findByBrandName(String brand, String name) {
-        return carRepository.findByBrandAndName(brand, name).orElseThrow(() ->
+        return carRepository.findByBrandAndOwnerName(brand, name).orElseThrow(()->
                 new EntityNotFoundException(String.format("%s with owner %s does not exist in database", brand, name)));
     }
 }

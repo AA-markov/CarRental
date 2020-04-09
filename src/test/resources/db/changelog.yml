@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 2020_04_09_001
+      id: 2020_04_10_001
       author: Andrey Markov
       changes:
         - sqlFile:

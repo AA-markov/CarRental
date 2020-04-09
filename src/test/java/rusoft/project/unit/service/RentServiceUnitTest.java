@@ -1,6 +1,5 @@
 package rusoft.project.unit.service;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +18,7 @@ import rusoft.project.service.RentServiceImpl;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -104,7 +103,7 @@ class RentServiceUnitTest {
 
     @Test
     void removeClientOnIncorrectClientCarCoupleReturnBadRequest() {
-        when(carRepository.findByBrandAndName(Mockito.anyString(), Mockito.anyString())).thenReturn(Optional.empty());
+        when(carRepository.findByBrandAndOwnerName(Mockito.anyString(), Mockito.anyString())).thenReturn(Optional.empty());
         rentEndDto.setClientName(basicClient.getName());
         ResponseStatus response = rentService.removeClient(rentEndDto);
         assertEquals(ResponseStatus.CLIENTCARNOTFOUND, response);
@@ -112,7 +111,7 @@ class RentServiceUnitTest {
 
     @Test
     void removeClientOnRequestReturnOk() {
-        when(carRepository.findByBrandAndName(Mockito.anyString(), Mockito.anyString()))
+        when(carRepository.findByBrandAndOwnerName(Mockito.anyString(), Mockito.anyString()))
                 .thenReturn(Optional.of(car.setOwner(client)));
         ResponseStatus response = rentService.removeClient(rentEndDto);
         assertEquals(ResponseStatus.OK, response);
